@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">DUOCUC</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card>
+    <ion-card-header>
+      <ion-text>
+        Iniciar sesion
+      </ion-text>
+    </ion-card-header>
+    <ion-card-content>  
+      <form [formGroup]="ionicForm" (ngSubmit)="save($event)" >
+        <ion-item>
+          <ion-label position="floating" >Usuario:</ion-label>
+          <ion-input type="text"  formControlName="usuario" #User  ></ion-input>
+          <ion-item *ngIf="ionicForm.get('usuario').errors && ionicForm.get('usuario').touched" >
+            <ion-label class="validatorIniciarSecion" *ngIf="ionicForm.get('usuario').hasError('required')" >
+              Debe ingresar un passowrd
+            </ion-label>
+          </ion-item>          
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"> Password:</ion-label>
+          <ion-input  type="password" formControlName="password" #Password > </ion-input>
+          <ion-item *ngIf="ionicForm.get('password').errors && ionicForm.get('password').touched" >
+            <ion-label class="validatorIniciarSecion" *ngIf="ionicForm.get('password').hasError('required')" >
+              Debe ingresar un passowrd
+            </ion-label>
+          </ion-item>
+        </ion-item>
+        
+      </form>
+      <ion-text><a (click)="presentLoadingWithOptionsRecuperar()"  [routerLink]="'/login/recuperar-clave'" >Olvidaste tu contraseña?</a> </ion-text>
+      <ion-button  color="primary" class="ion-margin-top" expand="block"
+       (click)="presentLoadingWithOptionsIngresar(User,Password)" >Ingresar</ion-button>
+       <ion-button  class="ion-margin-top" expand="block" (click)="presentLoadingWithOptionsCrear()" > Crear Usuario</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  
+
+
+</ion-content>
+  <ion-footer>
+  </ion-footer>

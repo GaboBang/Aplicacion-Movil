@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="end" class="ion-text-center" >DuocUC</ion-title>
+    <a  (click)="loadingBack()"  slot="start"> <ion-icon  name="arrow-back-circle-outline" style="font-size: 30px; color: white;"></ion-icon>  </a> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-contenido">
+
+
+<ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
+  <ion-card>
+    <ion-card-header>
+        <ion-text class="ion-text-center">
+          CREAR USUARIO
+        </ion-text>
+    </ion-card-header>
+    <ion-card-content>
+        <form [formGroup]="ionicForm" (ngSubmit)="save($event)">
+          <ion-item>
+            <ion-label position="floating" > Usuario: </ion-label>
+            <ion-input type="text" formControlName="usuario" #usuario ></ion-input>
+            <ion-item *ngIf="ionicForm.get('usuario').errors && ionicForm.get('usuario').touched" >
+              <ion-label class="validatorsCrearUsuario" *ngIf="ionicForm.get('usuario').hasError('required')" >
+                Debe ingresar un usuario
+              </ion-label>
+              <ion-label *ngIf="ionicForm.get('usuario').hasError('minLength')" >
+                debe ingresar un usuario
+              </ion-label>
+              <ion-label *ngIf="ionicForm.get('usuario').hasError('maxLength')">
+                el "usuario" no debe superar los 15 caracteres
+              </ion-label>
+            </ion-item>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" > Password: </ion-label>
+            <ion-input type="password" formControlName="password" #password ></ion-input>
+            <ion-item *ngIf="ionicForm.get('password').errors && ionicForm.get('password').touched" >
+              <ion-label class="validatorsCrearUsuario" *ngIf="ionicForm.get('password').hasError('required')" >
+                Debe ingresar un passowrd
+              </ion-label>
+            </ion-item>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" > Repita contraseña: </ion-label>
+            <ion-input type="password" formControlName="Rpassword" #Rpassword ></ion-input>
+            <ion-item *ngIf="ionicForm.get('Rpassword').errors && ionicForm.get('Rpassword').touched" >
+              <ion-label class="validatorsCrearUsuario" *ngIf="ionicForm.get('Rpassword').hasError('required')" >
+                Debe ingresar un usuario
+              </ion-label>
+            </ion-item>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" > Email: </ion-label>
+            <ion-input type="text" formControlName="email" #email ></ion-input>
+            <ion-item *ngIf="ionicForm.get('email').errors && ionicForm.get('email').touched" >
+              <ion-label class="validatorsCrearUsuario" *ngIf="ionicForm.get('email').hasError('required')" >
+                Debe ingresar un usuario
+              </ion-label>
+              <ion-label class="validatorsCrearUsuario" *ngIf="ionicForm.get('email').hasError('email')" >
+                No es un email
+              </ion-label>
+            </ion-item>
+          </ion-item>
+        
+          <ion-button type="submit" Expand="block" [disabled]="ionicForm.invalid" (click)="agregarUsuario(usuario,email,password,Rpassword)" > Crear usuario</ion-button>
+        </form>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+  
+</ion-content>
+<ion-footer  ></ion-footer>
